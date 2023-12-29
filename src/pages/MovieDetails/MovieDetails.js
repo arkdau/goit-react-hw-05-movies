@@ -9,7 +9,6 @@ import styled from "styled-components";
 export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
-  const [movieImg, setMovieImg] = useState(null);
   // useEffect(() => {
   //   // fetch(...)
   // }, [movieId]);
