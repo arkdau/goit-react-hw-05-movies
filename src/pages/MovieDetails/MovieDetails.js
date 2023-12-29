@@ -72,6 +72,10 @@ export const MovieDetails = () => {
             <p>User Score: {movieData.vote_average}</p>
             <h3>Overview</h3>
             <p>{movieData.overview}</p>
+            <h4>Genres</h4>
+            <p>{movieData.genres.map((item) => {
+              return <span key={item.id}>{item.name}  </span>
+            })}</p>
           </div>
         </Container>
       )}
