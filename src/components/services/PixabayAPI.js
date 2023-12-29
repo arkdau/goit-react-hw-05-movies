@@ -3,8 +3,12 @@
 
 // const BASE_API_URL = 'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12'
 
-const BASE_API_URL =
-  "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+const BASE_API_URL = "https://api.themoviedb.org/3";
+
+// "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+
+// const url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
+// url = 'https://api.themoviedb.org/3/movie/movie_id/images';
 
 // Timeout a fetch() Request
 async function fetchWithTimeout(resource, options) {
@@ -37,10 +41,36 @@ const options = {
   },
 };
 
-async function fetchMovies() {
+async function fetchMovies(q, movie_id) {
+  // if (q === "trending" || q === "movie") {
+  //   const url = `${BASE_API_URL}/${q}` + q === 'trending' ? '/movie/day?language=en-US' : '/movie_id?language=en-US';
+  // } else {
+  //   console.log()
+  // }
+
   try {
+    let url_1 = "";
+    // const url_1 = (q === "trending")
+    //   ? "/movie/day?language=en-US"
+    //   : `/${movie_id}?language=en-US`;
+    switch (q) {
+      case "trending":
+        url_1 = "/trending/movie/day?language=en-US";
+        break;
+      case "movie":
+        url_1 = `/movie/${movie_id}?language=en-US`;
+        break;
+      case "images":
+        url_1 = `/movie/${movie_id}/images`;
+        break;
+
+      default:
+        break;
+    }
+
+    const url = `${BASE_API_URL}/${url_1}`;
     const response = await fetchWithTimeout(
-      `${BASE_API_URL}`,
+      `${url}`,
       options,
     );
     // ok - shorthand for checking that the status is in the range 2xx (boolean)
@@ -49,10 +79,11 @@ async function fetchMovies() {
         `Network response was not OK - HTTP error: ${response.status}`,
       );
     }
-    // console.log('response: ', response);
+    console.log("response: ", response);
     const data = await response.json();
     // debugger;
-    return data.results;
+    // return data.results;
+    return data;
   } catch (error) {
     console.error(
       "There has been a problem with your fetch operation:",

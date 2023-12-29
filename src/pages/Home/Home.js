@@ -1,28 +1,34 @@
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
 
-export const Home = ({trendMovies}) => {
-  // useEffect(() => {
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  //
-  // const trendingMovies = async function fetchData() {
-  //   try {
-  //     const trendingMovies = await fetchMovies();
-  //     console.log("trendingMovies: ", trendingMovies);
-  //     return trendingMovies.results;
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // }
+export const Home = () => {
+  const [trendMovies, setTrendMovies] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function fetchData() {
+    try {
+      const trendingMovies = await fetchMovies('trending','');
+      setTrendMovies(trendingMovies.results);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 
   return (
     <main>
-      <h1> Trends Movies </h1>
-      <p>{trendMovies.map((movie) => {
-        return movie.title;
-      })}</p>
+      <h1>Trending today</h1>
+      <ul>
+        {trendMovies.map((movie) => (
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
+            <li>{movie.title}</li>
+          </Link>
+        ))}
+      </ul>
     </main>
   );
 };
