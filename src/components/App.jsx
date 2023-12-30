@@ -3,57 +3,23 @@ import { MovieDetails } from "./../pages/MovieDetails/MovieDetails";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./../pages/Home/Home";
 import { NotFound } from "./../pages/NotFound/NotFound";
-import { Container, Header, Link } from "./App.styled";
+// import { Container } from "./App.styled";
 import { Cast } from "./Cast/Cast";
 import { Reviews } from "./Reviews/Reviews";
+import { MainContainer } from "./MainContainer/MainContainer";
 
-// export const App = () => {
-//   return (
-//     <div>
-//       <nav>
-//         <Link to="/">Home</Link>
-//         <Link to="movies">Movies</Link>
-//       </nav>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/movies" element={<Movies />} />
-//         <Route path="/movies/:movieId" element={<MovieDetails />} />
-//         <Route path="*" element={<NotFound />} />
-//       </Routes>
-//     </div>
-//   );
-// };
-//
 export const App = () => {
   return (
-    <Container>
-      <Header>
-        {
-          /*<Logo>
-          <span role="img" aria-label="computer icon">
-            💻
-          </span>{" "}
-          GoMerch Store
-        </Logo>*/
-        }
-        <nav>
-          <Link to="/" end>
-            Home
-          </Link>
-          <Link to="movies">Movies</Link>
-        </nav>
-      </Header>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <Routes>
+      <Route path="/" element={<MainContainer />}>
+        <Route index element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Container>
+      </Route>
+    </Routes>
   );
 };
-
-// export default App;
