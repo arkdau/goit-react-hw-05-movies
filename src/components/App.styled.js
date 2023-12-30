@@ -16,6 +16,13 @@ export const Header = styled.header`
   margin-bottom: 16px;
   border-bottom: 1px solid black;
 
+border:none;
+ height: 10px;
+	width: 100%;
+ height: 25px;
+ margin-top: 0;
+ border-bottom: 1px solid #1f1209;
+ box-shadow: 0 10px 10px -10px #333;
   > nav {
     display: flex;
   }
@@ -40,6 +47,5 @@ export const Link = styled(NavLink)`
 `;
 
 // function Link(props) {
-  // return <NavLink style={...}>{props.children}</NavLink>
+// return <NavLink style={...}>{props.children}</NavLink>
 // }
-

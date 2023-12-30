@@ -14,14 +14,23 @@ import styled from "styled-components";
 //   }
 // `;
 
-
-export  const Image = styled.img`
+export const Image = styled.img`
   vertical-align: text-top;
 `;
 
-export  const Container = styled.div`
+export const Container = styled.div`
    display: flex;
    align-items: flex-start;
    justify-content: flex-start;
    gap: 12px;
+`;
+
+export const Hr = styled.hr`
+ border:none;
+  height: 10px;
+ 	width: 100%;
+	height: 25px;
+	margin-top: 0;
+	border-bottom: 1px solid #1f1209;
+	box-shadow: 0 10px 10px -10px #333;
 `;

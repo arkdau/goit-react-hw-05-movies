@@ -3,7 +3,7 @@
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
-import { Image, Container } from "./../MovieDetails/MovieDetails.styled";
+import { Image, Container, Hr } from "./../MovieDetails/MovieDetails.styled";
 // import styled from "styled-components";
 
 export const MovieDetails = () => {
@@ -77,7 +77,7 @@ export const MovieDetails = () => {
           </div>
         </Container>
       )}
-      <hr />
+      <Hr />
       <p>Additional information</p>
       <ul>
         <li key={1}>
@@ -88,7 +88,7 @@ export const MovieDetails = () => {
         </li>
       </ul>
 
-      <hr />
+      <Hr />
 
       <Outlet />
     </main>
