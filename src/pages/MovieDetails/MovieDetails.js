@@ -1,10 +1,10 @@
-import { Cast } from "./../../components/Cast/Cast";
-import { Reviews } from "./../../components/Reviews/Reviews";
-import { useParams } from "react-router-dom";
+// import { Cast } from "./../../components/Cast/Cast";
+// import { Reviews } from "./../../components/Reviews/Reviews";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
-// import { Header} from "./../MovieDetails/MovieDetails.styled";
-import styled from "styled-components";
+import { Image, Container } from "./../MovieDetails/MovieDetails.styled";
+// import styled from "styled-components";
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
@@ -43,21 +43,20 @@ export const MovieDetails = () => {
   //   height: 2.5rem;
   // `
 
-  const Image = styled.img`
-  vertical-align: text-top;
-`;
+//   const Image = styled.img`
+//   vertical-align: text-top;
+// `;
   // var posterFullUrl = "https://image.tmdb.org/t/p/w185//" + item.poster_path;
   // https://api.themoviedb.org/3/movie/872585//fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg
 
-  const Container = styled.div`
-   display: flex;
-   align-items: flex-start;
-   justify-content: flex-start;
-   gap: 12px;
-`;
+//   const Container = styled.div`
+//    display: flex;
+//    align-items: flex-start;
+//    justify-content: flex-start;
+//    gap: 12px;
+// `;
   return (
     <main>
-      <h1>MovieDetails {movieId}</h1>
       {movieData && (
         <Container>
           <Image
@@ -78,8 +77,20 @@ export const MovieDetails = () => {
           </div>
         </Container>
       )}
-      <Cast />
-      <Reviews />
+      <hr />
+      <p>Additional information</p>
+      <ul>
+        <li key={1}>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li key={2}>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+
+      <hr />
+
+      <Outlet />
     </main>
   );
 };

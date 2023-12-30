@@ -1,4 +1,4 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 //
 // export const  = styled.div`
 //   display: flex;
@@ -13,3 +13,15 @@
 //     display: flex;
 //   }
 // `;
+
+
+export  const Image = styled.img`
+  vertical-align: text-top;
+`;
+
+export  const Container = styled.div`
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+   gap: 12px;
+`;

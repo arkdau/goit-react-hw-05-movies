@@ -9,6 +9,8 @@ const BASE_API_URL = "https://api.themoviedb.org/3";
 
 // const url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
 // url = 'https://api.themoviedb.org/3/movie/movie_id/images';
+// const url = 'https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US';
+// const url = 'https://api.themoviedb.org/3/movie/movie_id/reviews?language=en-US&page=1';
 
 // Timeout a fetch() Request
 async function fetchWithTimeout(resource, options) {
@@ -49,24 +51,30 @@ async function fetchMovies(q, movie_id) {
   // }
 
   try {
-    // let url_1 = "";
-    const url_1 = (q === "trending")
-      ? "/trending/movie/day?language=en-US"
-      : `/movie/${movie_id}?language=en-US`;
-    // switch (q) {
-    //   case "trending":
-    //     url_1 = "/trending/movie/day?language=en-US";
-    //     break;
-    //   case "movie":
-    //     url_1 = `/movie/${movie_id}?language=en-US`;
-    //     break;
-    //   case "images":
-    //     url_1 = `/movie/${movie_id}/images`;
-    //     break;
-    //
-    //   default:
-    //     break;
-    // }
+    let url_1 = "";
+    // const url_1 = (q === "trending")
+    //   ? "/trending/movie/day?language=en-US"
+    //   : `/movie/${movie_id}?language=en-US`;
+    switch (q) {
+      case "trending":
+        url_1 = "/trending/movie/day?language=en-US";
+        break;
+      case "movie":
+        url_1 = `/movie/${movie_id}?language=en-US`;
+        break;
+      case "images":
+        url_1 = `/movie/${movie_id}/images`;
+        break;
+      case "cast":
+        url_1 = `/movie/${movie_id}/credits`;
+        break;
+      case "reviews":
+        url_1 = `/movie/${movie_id}/reviews`;
+        break;
+
+      default:
+        break;
+    }
 
     const url = `${BASE_API_URL}/${url_1}`;
     const response = await fetchWithTimeout(
