@@ -7,12 +7,19 @@ import { NotFound } from "./../pages/NotFound/NotFound";
 import { Cast } from "./Cast/Cast";
 import { Reviews } from "./Reviews/Reviews";
 import { MainContainer } from "./MainContainer/MainContainer";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const App = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/");
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<MainContainer />}>
         <Route index element={<Home />} />
+        <Route path="/goit-react-hw-05-movies" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
