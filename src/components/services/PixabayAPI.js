@@ -11,6 +11,7 @@ const BASE_API_URL = "https://api.themoviedb.org/3";
 // url = 'https://api.themoviedb.org/3/movie/movie_id/images';
 // const url = 'https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US';
 // const url = 'https://api.themoviedb.org/3/movie/movie_id/reviews?language=en-US&page=1';
+// const url = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
 
 // Timeout a fetch() Request
 async function fetchWithTimeout(resource, options) {
@@ -70,6 +71,10 @@ async function fetchMovies(q, movie_id) {
         break;
       case "reviews":
         url_1 = `/movie/${movie_id}/reviews`;
+        break;
+      case "query":
+        url_1 =
+          `/search/movie?query=${movie_id}&include_adult=false&language=en-US&page=1`;
         break;
 
       default:
