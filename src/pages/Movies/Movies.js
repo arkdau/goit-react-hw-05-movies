@@ -12,8 +12,8 @@ export const Movies = () => {
   const handleOnChange = (ev) => {
     const filter = ev.target.value;
     setQueryFilter(filter);
-    setURLSearchParams({query: filter});
-    console.log('Movies-query: ', query);
+    setURLSearchParams({ query: filter });
+    console.log("Movies-query: ", query);
   };
 
   const handleOnClick = (ev) => {
@@ -22,8 +22,11 @@ export const Movies = () => {
   };
 
   // useEffect(() => {
+  //   setQueryFilter(query);
+  //   console.log("movie-movieId: ", query);
+  //
   //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   // setURLSearchParams({query: movieId});
   // }, []);
 
   // useEffect(() => {
@@ -34,6 +37,7 @@ export const Movies = () => {
   async function fetchData() {
     try {
       const data = await fetchMovies("query", queryFilter);
+
       console.log("data-search: ", data.results);
       setMovieData(data.results);
     } catch (error) {
@@ -47,7 +51,10 @@ export const Movies = () => {
     <main>
       <h1>Movies</h1>
 
-      <input placeholder="Enter filter here" onChange={handleOnChange} />
+      <input
+        placeholder="Enter filter here"
+        onChange={handleOnChange}
+      />
       <button onClick={handleOnClick}>Search</button>
 
       <ul>
