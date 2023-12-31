@@ -1,14 +1,15 @@
 // import { Cast } from "./../../components/Cast/Cast";
 // import { Reviews } from "./../../components/Reviews/Reviews";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
-import { Image, Container, Hr } from "./../MovieDetails/MovieDetails.styled";
+import { Container, Hr, Image } from "./../MovieDetails/MovieDetails.styled";
 // import styled from "styled-components";
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
+  const navigate = useNavigate();
   // useEffect(() => {
   //   // fetch(...)
   // }, [movieId]);
@@ -43,39 +44,47 @@ export const MovieDetails = () => {
   //   height: 2.5rem;
   // `
 
-//   const Image = styled.img`
-//   vertical-align: text-top;
-// `;
+  //   const Image = styled.img`
+  //   vertical-align: text-top;
+  // `;
   // var posterFullUrl = "https://image.tmdb.org/t/p/w185//" + item.poster_path;
   // https://api.themoviedb.org/3/movie/872585//fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg
 
-//   const Container = styled.div`
-//    display: flex;
-//    align-items: flex-start;
-//    justify-content: flex-start;
-//    gap: 12px;
-// `;
+  //   const Container = styled.div`
+  //    display: flex;
+  //    align-items: flex-start;
+  //    justify-content: flex-start;
+  //    gap: 12px;
+  // `;
+
+  const moveBack = () => navigate("/");
+
   return (
     <main>
       {movieData && (
-        <Container>
-          <Image
-            src={`https://image.tmdb.org/t/p/w185/${movieData.poster_path}`}
-            alt=""
-          />
-          <div>
-            <h2>
-              Title: {movieData.title} ({movieData.release_date.slice(0, 4)})
-            </h2>
-            <p>User Score: {movieData.vote_average}</p>
-            <h3>Overview</h3>
-            <p>{movieData.overview}</p>
-            <h4>Genres</h4>
-            <p>{movieData.genres.map((item) => {
-              return <span key={item.id}>{item.name}  </span>
-            })}</p>
-          </div>
-        </Container>
+        <>
+          <button onClick={moveBack}>Go back</button>
+          <Container>
+            <Image
+              src={`https://image.tmdb.org/t/p/w185/${movieData.poster_path}`}
+              alt=""
+            />
+            <div>
+              <h2>
+                Title: {movieData.title} ({movieData.release_date.slice(0, 4)})
+              </h2>
+              <p>User Score: {movieData.vote_average}</p>
+              <h3>Overview</h3>
+              <p>{movieData.overview}</p>
+              <h4>Genres</h4>
+              <p>
+                {movieData.genres.map((item) => {
+                  return <span key={item.id}>{item.name}</span>;
+                })}
+              </p>
+            </div>
+          </Container>
+        </>
       )}
       <Hr />
       <p>Additional information</p>
