@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import fetchMovies from "components/services/PixabayAPI";
 
 export const Movies = () => {
   const [queryFilter, setQueryFilter] = useState();
   const [movieData, setMovieData] = useState([]);
+  const [urlSearchParams, setURLSearchParams] = useSearchParams();
+
+  const query = urlSearchParams.get("query");
 
   const handleOnChange = (ev) => {
     const filter = ev.target.value;
     setQueryFilter(filter);
+    setURLSearchParams({query: filter});
+    console.log('Movies-query: ', query);
   };
 
   const handleOnClick = (ev) => {
@@ -47,7 +52,7 @@ export const Movies = () => {
 
       <ul>
         {movieData.map((movie) => (
-          <Link to={`/movies/${movie.id}`} key={movie.id}>
+          <Link to={`/search/movies/${movie.id}`} key={movie.id}>
             <li>{movie.title}</li>
           </Link>
         ))}

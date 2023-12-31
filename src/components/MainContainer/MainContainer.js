@@ -11,7 +11,7 @@ export function MainContainer() {
             <Link to="/" end>
               Home
             </Link>
-            <Link to="movies">Movies</Link>
+            <Link to="search/movies">Movies</Link>
           </nav>
         </Header>
       </Container>
