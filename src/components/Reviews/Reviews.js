@@ -15,13 +15,14 @@ const Reviews = () => {
   async function fetchData() {
     try {
       const data = await fetchMovies("reviews", movieId);
-      console.log("data-reviews: ", data.results);
-      console.log("id: ", movieId);
+      // console.log("data-reviews: ", data.results);
+      // console.log("id: ", movieId);
       setReviews(data.results);
     } catch (error) {
       console.error(error.message);
     } finally {
-      console.log("cast: ", reviews);
+      // console.log("cast: ", reviews);
+      return 1;
     }
   }
 

@@ -15,13 +15,14 @@ const Cast = () => {
   async function fetchData() {
     try {
       const data = await fetchMovies("cast", movieId);
-      console.log("data-cast: ", data.cast);
-      console.log("id: ", movieId);
+      // console.log("data-cast: ", data.cast);
+      // console.log("id: ", movieId);
       setCast(data.cast);
     } catch (error) {
       console.error(error.message);
     } finally {
-      console.log("cast: ", cast);
+      // console.log("cast: ", cast);
+      return 1;
     }
   }
 

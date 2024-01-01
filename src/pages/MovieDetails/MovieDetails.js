@@ -21,12 +21,13 @@ const MovieDetails = () => {
   async function fetchData() {
     try {
       const data = await fetchMovies("movie", movieId);
-      console.log("data: ", data);
+      // console.log("data: ", data);
       setMovieData(data);
     } catch (error) {
       console.error(error.message);
     } finally {
-      console.log("movieData: ", movieData);
+      // console.log("movieData: ", movieData);
+      return 1;
     }
   }
 

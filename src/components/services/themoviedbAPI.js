@@ -1,21 +1,7 @@
-// const key = ;
-// const image_type = "photo";
-
-// const BASE_API_URL = 'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12'
-
 const BASE_API_URL = "https://api.themoviedb.org/3";
-
-// "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
-
-// const url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
-// url = 'https://api.themoviedb.org/3/movie/movie_id/images';
-// const url = 'https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US';
-// const url = 'https://api.themoviedb.org/3/movie/movie_id/reviews?language=en-US&page=1';
-// const url = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
 
 // Timeout a fetch() Request
 async function fetchWithTimeout(resource, options) {
-  // console.log('resource: ', resource);
   const { timeout = 8000 } = options;
 
   const controller = new AbortController();
@@ -26,7 +12,6 @@ async function fetchWithTimeout(resource, options) {
     signal: controller.signal,
   });
   clearTimeout(id);
-  // console.log('response: ', response);
   return response;
 }
 
@@ -45,17 +30,9 @@ const options = {
 };
 
 async function fetchMovies(q, movie_id) {
-  // if (q === "trending" || q === "movie") {
-  //   const url = `${BASE_API_URL}/${q}` + q === 'trending' ? '/movie/day?language=en-US' : '/movie_id?language=en-US';
-  // } else {
-  //   console.log()
-  // }
-
   try {
     let url_1 = "";
-    // const url_1 = (q === "trending")
-    //   ? "/trending/movie/day?language=en-US"
-    //   : `/movie/${movie_id}?language=en-US`;
+
     switch (q) {
       case "trending":
         url_1 = "/trending/movie/day?language=en-US";
@@ -92,10 +69,8 @@ async function fetchMovies(q, movie_id) {
         `Network response was not OK - HTTP error: ${response.status}`,
       );
     }
-    console.log("response: ", response);
     const data = await response.json();
     // debugger;
-    // return data.results;
     return data;
   } catch (error) {
     console.error(
@@ -104,6 +79,5 @@ async function fetchMovies(q, movie_id) {
     );
   }
 }
-// }
 
 export default fetchMovies;

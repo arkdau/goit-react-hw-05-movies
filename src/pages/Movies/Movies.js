@@ -10,23 +10,24 @@ const Movies = () => {
   const query = urlSearchParams.get("query");
 
   useEffect(() => {
-    // setMovieData((movieData) => {
-    //   console.log('useEfect-movieData: ', movieData);
-    //   return movieData;
-    // });
-    console.log('useEffect-query: ', query);
-    // const q = query ? fetchData(query) : 0 ;
-    // console.log('q: ', q);
+
+
+
+
+
+
+
     if (query) {
       fetchData(query);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOnChange = (ev) => {
     const filter = ev.target.value;
     setQueryFilter(filter);
     setURLSearchParams({ query: filter });
-    console.log("Movies-query: ", query);
+    // console.log("Movies-query: ", query);
   };
 
   const handleOnClick = (ev) => {
@@ -38,20 +39,19 @@ const Movies = () => {
     try {
       const data = await fetchMovies("query", search);
 
-      console.log("data-search: ", data.results);
+      // console.log("data-search: ", data.results);
       setMovieData(data.results);
     } catch (error) {
       console.error(error.message);
     } finally {
-      console.log("movieData: ", movieData);
+      // console.log("movieData: ", movieData);
       return 1;
     }
   }
 
   return (
     <main>
-      <h1>Movies</h1>
-
+      {/*}<h1>Movies</h1>*/}
       <input
         placeholder="Enter filter here"
         onChange={handleOnChange}
