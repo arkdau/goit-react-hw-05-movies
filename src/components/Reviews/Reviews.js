@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import fetchMovies from "components/services/PixabayAPI";
+import fetchMovies from "components/services/themoviedbAPI";
 import { Li } from "./Reviews.styled";
 
 const Reviews = () => {
@@ -18,9 +18,6 @@ const Reviews = () => {
       console.log("data-reviews: ", data.results);
       console.log("id: ", movieId);
       setReviews(data.results);
-      // const image = await fetchMovies('images', movieId);
-      // setMovieImg(image);
-      // console.log(image);
     } catch (error) {
       console.error(error.message);
     } finally {

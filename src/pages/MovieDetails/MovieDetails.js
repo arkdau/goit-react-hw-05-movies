@@ -1,18 +1,12 @@
-// import { Cast } from "./../../components/Cast/Cast";
-// import { Reviews } from "./../../components/Reviews/Reviews";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { Suspense, useEffect, useState } from "react";
-import fetchMovies from "components/services/PixabayAPI";
+import fetchMovies from "components/services/themoviedbAPI";
 import { Container, Hr, Image } from "./../MovieDetails/MovieDetails.styled";
-// import styled from "styled-components";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   // fetch(...)
-  // }, [movieId]);
 
   useEffect(() => {
     fetchData();
@@ -29,9 +23,6 @@ const MovieDetails = () => {
       const data = await fetchMovies("movie", movieId);
       console.log("data: ", data);
       setMovieData(data);
-      // const image = await fetchMovies('images', movieId);
-      // setMovieImg(image);
-      // console.log(image);
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -39,25 +30,7 @@ const MovieDetails = () => {
     }
   }
 
-  //   const Image = styled.img`
-  //   vertical-align: text-top;
-  //   height: 2.5rem;
-  // `
-
-  //   const Image = styled.img`
-  //   vertical-align: text-top;
-  // `;
-  // var posterFullUrl = "https://image.tmdb.org/t/p/w185//" + item.poster_path;
-  // https://api.themoviedb.org/3/movie/872585//fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg
-
-  //   const Container = styled.div`
-  //    display: flex;
-  //    align-items: flex-start;
-  //    justify-content: flex-start;
-  //    gap: 12px;
-  // `;
-
-  const moveBack = () => navigate("/");
+  const moveBack = () => navigate(-1);
 
   return (
     <main>

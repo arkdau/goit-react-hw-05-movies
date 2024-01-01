@@ -1,6 +1,6 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import fetchMovies from "./../../components/services/PixabayAPI";
+import fetchMovies from "./../../components/services/themoviedbAPI";
 
 const Movies = () => {
   const [queryFilter, setQueryFilter] = useState();
@@ -8,6 +8,19 @@ const Movies = () => {
   const [urlSearchParams, setURLSearchParams] = useSearchParams();
 
   const query = urlSearchParams.get("query");
+
+  useEffect(() => {
+    // setMovieData((movieData) => {
+    //   console.log('useEfect-movieData: ', movieData);
+    //   return movieData;
+    // });
+    console.log('useEffect-query: ', query);
+    // const q = query ? fetchData(query) : 0 ;
+    // console.log('q: ', q);
+    if (query) {
+      fetchData(query);
+    }
+  }, []);
 
   const handleOnChange = (ev) => {
     const filter = ev.target.value;
@@ -18,25 +31,12 @@ const Movies = () => {
 
   const handleOnClick = (ev) => {
     ev.preventDefault();
-    fetchData();
+    fetchData(queryFilter);
   };
 
-  // useEffect(() => {
-  //   setQueryFilter(query);
-  //   console.log("movie-movieId: ", query);
-  //
-  //   fetchData();
-  //   // setURLSearchParams({query: movieId});
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [movieId]);
-
-  async function fetchData() {
+  async function fetchData(search) {
     try {
-      const data = await fetchMovies("query", queryFilter);
+      const data = await fetchMovies("query", search);
 
       console.log("data-search: ", data.results);
       setMovieData(data.results);
@@ -44,6 +44,7 @@ const Movies = () => {
       console.error(error.message);
     } finally {
       console.log("movieData: ", movieData);
+      return 1;
     }
   }
 

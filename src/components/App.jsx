@@ -10,13 +10,6 @@ const Cast = lazy(() => import("./Cast/Cast"));
 const Reviews = lazy(() => import("./Reviews/Reviews"));
 const MainContainer = lazy(() => import("./MainContainer/MainContainer"));
 
-// const MoviesPage = () => (
-//   <Suspense fallback={<div>Page is Loading...</div>}>
-//     <Movies />
-//   </Suspense>
-// );
-
-
 export const App = () => {
   const navigate = useNavigate();
   useEffect(() => {

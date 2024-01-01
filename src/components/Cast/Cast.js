@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import fetchMovies from "components/services/PixabayAPI";
+import fetchMovies from "components/services/themoviedbAPI";
 import { Image } from "./Cast.styled";
 
 const Cast = () => {
@@ -18,9 +18,6 @@ const Cast = () => {
       console.log("data-cast: ", data.cast);
       console.log("id: ", movieId);
       setCast(data.cast);
-      // const image = await fetchMovies('images', movieId);
-      // setMovieImg(image);
-      // console.log(image);
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -33,10 +30,12 @@ const Cast = () => {
       <ul>
         {cast && cast.map((item) => (
           <div key={item.id}>
-            {item.profile_path && <Image
-              src={`https://image.tmdb.org/t/p/w185/${item.profile_path}`}
-              alt=""
-            />}
+            {item.profile_path && (
+              <Image
+                src={`https://image.tmdb.org/t/p/w185/${item.profile_path}`}
+                alt=""
+              />
+            )}
             <li>
               {item.name}
             </li>

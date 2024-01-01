@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Suspense, useEffect, useState } from "react";
-import fetchMovies from "components/services/PixabayAPI";
+import fetchMovies from "components/services/themoviedbAPI";
 
 const Home = () => {
   const [trendMovies, setTrendMovies] = useState([]);
