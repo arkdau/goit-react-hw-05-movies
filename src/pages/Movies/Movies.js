@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import fetchMovies from "components/services/PixabayAPI";
+import fetchMovies from "./../../components/services/PixabayAPI";
 
-export const Movies = () => {
+const Movies = () => {
   const [queryFilter, setQueryFilter] = useState();
   const [movieData, setMovieData] = useState([]);
   const [urlSearchParams, setURLSearchParams] = useSearchParams();
@@ -56,14 +56,17 @@ export const Movies = () => {
         onChange={handleOnChange}
       />
       <button onClick={handleOnClick}>Search</button>
-
-      <ul>
-        {movieData.map((movie) => (
-          <Link to={`/search/movies/${movie.id}`} key={movie.id}>
-            <li>{movie.title}</li>
-          </Link>
-        ))}
-      </ul>
+      <Suspense fallback={<div>Loading page...</div>}>
+        <ul>
+          {movieData.map((movie) => (
+            <Link to={`/search/movies/${movie.id}`} key={movie.id}>
+              <li>{movie.title}</li>
+            </Link>
+          ))}
+        </ul>
+      </Suspense>
     </main>
   );
 };
+
+export default Movies;

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import fetchMovies from "components/services/PixabayAPI";
 import { Image } from "./Cast.styled";
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState();
 
@@ -47,3 +47,5 @@ export const Cast = () => {
     </main>
   );
 };
+
+export default Cast;

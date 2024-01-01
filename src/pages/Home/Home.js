@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
 
-export const Home = () => {
+const Home = () => {
   const [trendMovies, setTrendMovies] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const Home = () => {
 
   async function fetchData() {
     try {
-      const trendingMovies = await fetchMovies('trending','');
+      const trendingMovies = await fetchMovies("trending", "");
       setTrendMovies(trendingMovies.results);
     } catch (error) {
       console.error(error.message);
@@ -21,14 +21,18 @@ export const Home = () => {
 
   return (
     <main>
-      <h1>Trending today</h1>
-      <ul>
-        {trendMovies.map((movie) => (
-          <Link to={`/search/movies/${movie.id}`} key={movie.id}>
-            <li>{movie.title}</li>
-          </Link>
-        ))}
-      </ul>
+      <Suspense fallback={<div>Loading page...</div>}>
+        <h1>Trending today</h1>
+        <ul>
+          {trendMovies.map((movie) => (
+            <Link to={`/search/movies/${movie.id}`} key={movie.id}>
+              <li>{movie.title}</li>
+            </Link>
+          ))}
+        </ul>
+      </Suspense>
     </main>
   );
 };
+
+export default Home;

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import fetchMovies from "components/services/PixabayAPI";
 import { Li } from "./Reviews.styled";
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState();
 
@@ -43,3 +43,5 @@ export const Reviews = () => {
     </main>
   );
 };
+
+export default Reviews;

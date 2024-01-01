@@ -1,21 +1,29 @@
-import { Movies } from "pages/Movies/Movies";
-import { MovieDetails } from "./../pages/MovieDetails/MovieDetails";
-import { Route, Routes } from "react-router-dom";
-import { Home } from "./../pages/Home/Home";
+import { lazy, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { NotFound } from "./../pages/NotFound/NotFound";
-// import { Container } from "./App.styled";
-import { Cast } from "./Cast/Cast";
-import { Reviews } from "./Reviews/Reviews";
-import { MainContainer } from "./MainContainer/MainContainer";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
+const Home = lazy(() => import("./../pages/Home/Home"));
+const Movies = lazy(() => import("./../pages/Movies/Movies"));
+const MovieDetails = lazy(() => import("./../pages/MovieDetails/MovieDetails"));
+
+const Cast = lazy(() => import("./Cast/Cast"));
+const Reviews = lazy(() => import("./Reviews/Reviews"));
+const MainContainer = lazy(() => import("./MainContainer/MainContainer"));
+
+// const MoviesPage = () => (
+//   <Suspense fallback={<div>Page is Loading...</div>}>
+//     <Movies />
+//   </Suspense>
+// );
+
 
 export const App = () => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <Routes>
       <Route path="/" element={<MainContainer />}>

@@ -1,12 +1,12 @@
 // import { Cast } from "./../../components/Cast/Cast";
 // import { Reviews } from "./../../components/Reviews/Reviews";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import fetchMovies from "components/services/PixabayAPI";
 import { Container, Hr, Image } from "./../MovieDetails/MovieDetails.styled";
 // import styled from "styled-components";
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const navigate = useNavigate();
@@ -63,27 +63,30 @@ export const MovieDetails = () => {
     <main>
       {movieData && (
         <>
-          <button onClick={moveBack}>Go back</button>
-          <Container>
-            <Image
-              src={`https://image.tmdb.org/t/p/w185/${movieData.poster_path}`}
-              alt=""
-            />
-            <div>
-              <h2>
-                Title: {movieData.title} ({movieData.release_date.slice(0, 4)})
-              </h2>
-              <p>User Score: {movieData.vote_average}</p>
-              <h3>Overview</h3>
-              <p>{movieData.overview}</p>
-              <h4>Genres</h4>
-              <p>
-                {movieData.genres.map((item) => {
-                  return <span key={item.id}>{item.name}</span>;
-                })}
-              </p>
-            </div>
-          </Container>
+          <Suspense fallback={<div>Loading page...</div>}>
+            <button onClick={moveBack}>Go back</button>
+            <Container>
+              <Image
+                src={`https://image.tmdb.org/t/p/w185/${movieData.poster_path}`}
+                alt=""
+              />
+              <div>
+                <h2>
+                  Title: {movieData.title}{" "}
+                  ({movieData.release_date.slice(0, 4)})
+                </h2>
+                <p>User Score: {movieData.vote_average}</p>
+                <h3>Overview</h3>
+                <p>{movieData.overview}</p>
+                <h4>Genres</h4>
+                <p>
+                  {movieData.genres.map((item) => {
+                    return <span key={item.id}>{item.name}</span>;
+                  })}
+                </p>
+              </div>
+            </Container>
+          </Suspense>
         </>
       )}
       <Hr />
@@ -98,8 +101,11 @@ export const MovieDetails = () => {
       </ul>
 
       <Hr />
-
-      <Outlet />
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
+
+export default MovieDetails;

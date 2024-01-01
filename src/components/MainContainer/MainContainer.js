@@ -1,8 +1,9 @@
+import { Suspense } from "react";
 import { Container } from "pages/MovieDetails/MovieDetails.styled";
 import { Outlet } from "react-router-dom";
 import { Header, Link } from "./../App.styled";
 
-export function MainContainer() {
+export default function MainContainer() {
   return (
     <>
       <Container>
@@ -15,7 +16,9 @@ export function MainContainer() {
           </nav>
         </Header>
       </Container>
-      <Outlet />
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }
